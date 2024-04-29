@@ -1,18 +1,20 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
+
+import Search from "./components/Search";
+import List from "./components/List";
+import Header from "./components/Header";
 
 function App() {
-  const [currentSearchTerm, setCurrentSearchTerm] = useState("Dogs")
+  const [currentSearchTerm, setCurrentSearchTerm] = useState("Arrow");
 
   return (
     <>
-    <Header />
-    <ShowSearch />
-    <ShowList />
+      <Header />
+      <Search setCurrentSearchTerm={setCurrentSearchTerm} />
+      <List currentSearchTerm={currentSearchTerm} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
