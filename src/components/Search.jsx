@@ -1,27 +1,35 @@
 import { useState } from "react";
 
-function ShowSearch({ setCurrentSearchTerm }) {
+import Input from "./Input";
+
+function ShowSearch({ shows, setCurrentSearchTerm }) {
   const [newSearchTerm, setNewSearchTerm] = useState("");
 
   function handleSubmit(event) {
     event.preventDefault();
+    console.log(newSearchTerm);
     setCurrentSearchTerm(newSearchTerm);
     setNewSearchTerm("");
   }
   function handleChange(event) {
-    setNewSearchTerm(event.target.value);
+    console.log(event.target.innerText);
+    setNewSearchTerm(event.target.innerText);
   }
 
   return (
-    <form className="search-form" onSubmit={handleSubmit}>
-      <label htmlFor="search-input">Search: </label>
-      <input
+    <form onSubmit={handleSubmit}>
+      <Input
+        shows={shows}
+        newSearchTerm={newSearchTerm}
+        handleChange={handleChange}
+      />
+      {/* <input
         type="text"
         id="search-input"
         value={newSearchTerm}
         onChange={handleChange}
-      />
-      <button>Go!</button>
+      /> */}
+      <button type="submit">Go!</button>
     </form>
   );
 }

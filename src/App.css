@@ -6,10 +6,21 @@
   font-family: Arial, sans-serif;
 }
 
-.search-form {
+form {
+  display: flex;
+  justify-content: center;
   margin-bottom: 20px;
 }
 
+form div {
+  margin-right: 1rem;
+  background-color: #d7d7d7;
+}
+
+.custom-input {
+  background-color: #007bff;
+  color: #0056b3;
+}
 label {
   font-weight: bold;
 }

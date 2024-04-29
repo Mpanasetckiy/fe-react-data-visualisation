@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import Rating from "./Rating";
+
 function ShowList(props) {
   const { currentSearchTerm } = props;
   const [shows, setShows] = useState([]);
@@ -20,6 +22,7 @@ function ShowList(props) {
         return res.json();
       })
       .then((data) => {
+        console.log(data);
         setShows(data);
         setIsLoading(false);
       })
@@ -32,32 +35,33 @@ function ShowList(props) {
   return isLoading ? (
     <h2>Loading...</h2>
   ) : (
-    <ul>
-      {shows.length === 0 ? (
-        <h2>No shows :( </h2>
-      ) : (
-        shows.map(
-          ({
-            show: {
-              id,
-              name,
-              image,
-              rating: { average },
-            },
-          }) => {
-            return (
-              <li key={id}>
-                <h3>{name}</h3>
+    <section>
+      <ul>
+        {shows.length === 0 ? (
+          <h2>No shows :( </h2>
+        ) : (
+          shows.map(
+            ({
+              show: {
+                id,
+                name,
+                image,
+                rating: { average },
+              },
+            }) => {
+              return (
+                <li key={id}>
+                  <h3>{name}</h3>
 
-                <img src={image ? image.medium : ""} alt="poster" />
-
-                <p>Rating: {average ? average : "_"}</p>
-              </li>
-            );
-          }
-        )
-      )}
-    </ul>
+                  <img src={image ? image.medium : ""} alt="poster" />
+                  {average ? <Rating rating={average} /> : <p></p>}
+                </li>
+              );
+            }
+          )
+        )}
+      </ul>
+    </section>
   );
 }
 
