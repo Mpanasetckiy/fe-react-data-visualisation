@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 
 import { MoonLoader } from "react-spinners";
-import Rating from "./Rating";
+
+import Show from "./Show";
 
 function ShowList(props) {
   const { currentSearchTerm } = props;
@@ -46,22 +47,9 @@ function ShowList(props) {
       {shows.length === 0 ? (
         <h3>No shows :(</h3>
       ) : (
-        shows.map(
-          ({
-            show: {
-              id,
-              name,
-              image,
-              rating: { average },
-            },
-          }) => {
+        shows.map(({ show } ) => {
             return (
-              <li key={id}>
-                <h3>{name}</h3>
-
-                <img src={image ? image.medium : ""} alt="poster" />
-                {average ? <Rating rating={average} /> : <p></p>}
-              </li>
+              <Show key={show.id} showItem={show} />
             );
           }
         )

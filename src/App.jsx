@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
 
 import Search from "./components/Search";
@@ -33,12 +34,17 @@ function App() {
   };
 
   return (
-    <>
+      <>
       <Header />
       <Search setCurrentSearchTerm={setCurrentSearchTerm} shows={shows} />
-      <section>
-        <List currentSearchTerm={currentSearchTerm} />
-      </section>
+    <Routes>
+      
+     
+      <Route path="/" element=       
+      {<List currentSearchTerm={currentSearchTerm} />}
+     />
+      
+    </Routes>
     </>
   );
 }

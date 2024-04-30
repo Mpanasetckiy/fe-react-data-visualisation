@@ -4,7 +4,6 @@ import Stack from "@mui/material/Stack";
 import Autocomplete from "@mui/material/Autocomplete";
 
 function Input({ shows, newSearchTerm, handleChange }) {
-  console.log(shows);
   return (
     <Stack spacing={2} sx={{ width: 300 }}>
       <Autocomplete

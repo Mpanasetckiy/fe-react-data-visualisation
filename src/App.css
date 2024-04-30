@@ -78,3 +78,7 @@ img {
 p:last-child {
   font-weight: bold;
 }
+
+.loader {
+  display: flex !important;
+}

@@ -7,27 +7,28 @@ function ShowSearch({ shows, setCurrentSearchTerm }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    setCurrentSearchTerm(newSearchTerm);
+    const searchWithSpace =  newSearchTerm.split(' ').join('%20');
+    setCurrentSearchTerm(searchWithSpace);
     setNewSearchTerm("");
   }
   function handleChange(event) {
-    console.log(event.target.innerText);
-    setNewSearchTerm(event.target.innerText);
+    const searchTerm = event.target.value;
+    setNewSearchTerm(searchTerm);
   }
 
   return (
     <form onSubmit={handleSubmit}>
-      <Input
+      {/* <Input
         shows={shows}
         newSearchTerm={newSearchTerm}
         handleChange={handleChange}
-      />
-      {/* <input
+      /> */}
+      <input
         type="text"
         id="search-input"
         value={newSearchTerm}
         onChange={handleChange}
-      /> */}
+      />
       <button type="submit">Go!</button>
     </form>
   );
