@@ -7,7 +7,6 @@ function ShowSearch({ shows, setCurrentSearchTerm }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(newSearchTerm);
     setCurrentSearchTerm(newSearchTerm);
     setNewSearchTerm("");
   }

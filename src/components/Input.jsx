@@ -4,21 +4,23 @@ import Stack from "@mui/material/Stack";
 import Autocomplete from "@mui/material/Autocomplete";
 
 function Input({ shows, newSearchTerm, handleChange }) {
+  console.log(shows);
   return (
-    <Stack spacing={1} sx={{ width: 300 }}>
+    <Stack spacing={2} sx={{ width: 300 }}>
       <Autocomplete
         freeSolo
         id="free-solo-2-demo"
         disableClearable
-        options={shows.map((option) => option.name)}
-        value={newSearchTerm}
         onChange={handleChange}
+        options={shows.map((option) => ({
+          label: option.name,
+          id: option.id,
+        }))}
         renderInput={(params) => (
           <TextField
             {...params}
             label="Search input"
             InputProps={{
-              className: "custom-input",
               ...params.InputProps,
               type: "search",
             }}

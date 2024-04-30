@@ -36,7 +36,9 @@ function App() {
     <>
       <Header />
       <Search setCurrentSearchTerm={setCurrentSearchTerm} shows={shows} />
-      <List currentSearchTerm={currentSearchTerm} />
+      <section>
+        <List currentSearchTerm={currentSearchTerm} />
+      </section>
     </>
   );
 }

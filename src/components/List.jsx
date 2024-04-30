@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 
+import { MoonLoader } from "react-spinners";
 import Rating from "./Rating";
 
 function ShowList(props) {
   const { currentSearchTerm } = props;
   const [shows, setShows] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [isError, setError] = useState(false);
 
   useEffect(() => {
@@ -32,36 +33,40 @@ function ShowList(props) {
       });
   }
 
-  return isLoading ? (
-    <h2>Loading...</h2>
-  ) : (
-    <section>
+  if (isLoading) {
+    return (
       <ul>
-        {shows.length === 0 ? (
-          <h2>No shows :( </h2>
-        ) : (
-          shows.map(
-            ({
-              show: {
-                id,
-                name,
-                image,
-                rating: { average },
-              },
-            }) => {
-              return (
-                <li key={id}>
-                  <h3>{name}</h3>
-
-                  <img src={image ? image.medium : ""} alt="poster" />
-                  {average ? <Rating rating={average} /> : <p></p>}
-                </li>
-              );
-            }
-          )
-        )}
+        <MoonLoader color="#646cff" className="loader" />
       </ul>
-    </section>
+    );
+  }
+
+  return (
+    <ul className="shows-list">
+      {shows.length === 0 ? (
+        <h3>No shows :(</h3>
+      ) : (
+        shows.map(
+          ({
+            show: {
+              id,
+              name,
+              image,
+              rating: { average },
+            },
+          }) => {
+            return (
+              <li key={id}>
+                <h3>{name}</h3>
+
+                <img src={image ? image.medium : ""} alt="poster" />
+                {average ? <Rating rating={average} /> : <p></p>}
+              </li>
+            );
+          }
+        )
+      )}
+    </ul>
   );
 }
 
