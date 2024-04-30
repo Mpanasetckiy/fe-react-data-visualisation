@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
 import { MoonLoader } from "react-spinners";
 import Show from "./Show";
 
-function ShowList(props) {
-  const { currentSearchTerm } = props;
+function ShowList({ currentSearchTerm }) {
   const [shows, setShows] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setError] = useState(false);
@@ -41,22 +39,13 @@ function ShowList(props) {
     );
   }
 
-  // const handleClick = (e) => {
-  //   const showId = e.target.id;
-  //   setCurrentShowId(showId);
-  // };
-
   return (
     <ul className="shows-list">
       {shows.length === 0 ? (
         <h3>No shows :(</h3>
       ) : (
         shows.map(({ show }) => {
-          return (
-            <Link to={`/show/${show.id}`} key={show.id}>
-              <Show key={show.id} showItem={show} />
-            </Link>
-          );
+          return <Show key={show.id} showItem={show} />;
         })
       )}
     </ul>

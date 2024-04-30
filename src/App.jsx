@@ -26,6 +26,7 @@ function App() {
         return res.json();
       })
       .then((data) => {
+        setIsLoading(false);
         setShows(data);
       })
       .catch((error) => {

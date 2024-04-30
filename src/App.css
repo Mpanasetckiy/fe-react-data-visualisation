@@ -80,10 +80,6 @@ img:hover {
   box-shadow: 0 8px 8px #ccc;
 }
 
-p:last-child {
-  font-weight: bold;
-}
-
 .loader {
   display: flex !important;
 }
@@ -102,6 +98,12 @@ p:last-child {
 }
 .page-container img {
   max-height: 40vh;
+}
+
+.page-table {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
 tbody {

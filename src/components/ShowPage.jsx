@@ -6,16 +6,14 @@ import Rating from "./Rating";
 
 const ShowPage = () => {
   const [currentShow, setCurrentShow] = useState(null);
-  const [currentShowId, setCurrentShowId] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const { show_id } = useParams();
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setCurrentShowId(show_id);
     fetchShowById();
-  }, []);
+  }, [show_id]);
 
   function fetchShowById() {
     setIsLoading(true);
@@ -32,11 +30,13 @@ const ShowPage = () => {
       })
       .catch((err) => {
         setIsLoading(false);
-        // setError(true);
       });
   }
 
-  console.log(currentShow);
+  const handleClick = (e) => {
+    navigate("/");
+  };
+
   return !isLoading ? (
     <div className="page-container">
       <div>
@@ -44,38 +44,43 @@ const ShowPage = () => {
         <img src={currentShow.image.original} alt="" />
       </div>
       <div className="page-block">
-        <div>{currentShow.summary}</div>
-        <div>
-          <p>Information</p>
-          <table>
-            <tbody className="">
-              <tr>
-                <td>Country:</td>
-                <td>{currentShow.network.country.name}</td>
-              </tr>
-              <tr>
-                <td>Rating: </td>
-                <td>{<Rating rating={currentShow.rating.average} />}</td>
-              </tr>
-              <tr>
-                <td>Released:</td>
-                <td>{currentShow.premiered}</td>
-              </tr>
-              <tr>
-                <td>Ended:</td>
-                <td>{currentShow.ended}</td>
-              </tr>
-              <tr>
-                <td>Genres:</td>
-                <td>{currentShow.genres.join(", ")}</td>
-              </tr>
-            </tbody>
-          </table>
+        <div dangerouslySetInnerHTML={{ __html: currentShow?.summary }}></div>
+        <div className="page-table">
+          <div>
+            <p>Information</p>
+            <table>
+              <tbody className="">
+                <tr>
+                  <td>Country:</td>
+                  <td>{currentShow.network.country.name}</td>
+                </tr>
+                <tr>
+                  <td>Rating: </td>
+                  <td>{<Rating rating={currentShow.rating.average} />}</td>
+                </tr>
+                <tr>
+                  <td>Released:</td>
+                  <td>{currentShow.premiered}</td>
+                </tr>
+                <tr>
+                  <td>Ended:</td>
+                  <td>{currentShow.ended}</td>
+                </tr>
+                <tr>
+                  <td>Genres:</td>
+                  <td>{currentShow.genres.join(", ")}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <button onClick={handleClick}>BACK</button>
+          </div>
         </div>
       </div>
     </div>
   ) : (
-    <MoonLoader />
+    <MoonLoader className="loader" />
   );
 };
 export default ShowPage;

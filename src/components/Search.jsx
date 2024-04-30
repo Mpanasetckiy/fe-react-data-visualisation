@@ -1,13 +1,18 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function ShowSearch({ setCurrentSearchTerm }) {
   const [newSearchTerm, setNewSearchTerm] = useState("");
+  const navigate = useNavigate();
 
   function handleSubmit(event) {
     event.preventDefault();
     const searchWithSpace = newSearchTerm.split(" ").join("%20");
-    setCurrentSearchTerm(searchWithSpace);
-    setNewSearchTerm("");
+    if (newSearchTerm !== "") {
+      setCurrentSearchTerm(searchWithSpace);
+      setNewSearchTerm("");
+      navigate("/");
+    }
   }
   function handleChange(event) {
     const searchTerm = event.target.value;
