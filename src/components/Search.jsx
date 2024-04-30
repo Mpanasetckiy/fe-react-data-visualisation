@@ -1,13 +1,11 @@
 import { useState } from "react";
 
-import Input from "./Input";
-
-function ShowSearch({ shows, setCurrentSearchTerm }) {
+function ShowSearch({ setCurrentSearchTerm }) {
   const [newSearchTerm, setNewSearchTerm] = useState("");
 
   function handleSubmit(event) {
     event.preventDefault();
-    const searchWithSpace =  newSearchTerm.split(' ').join('%20');
+    const searchWithSpace = newSearchTerm.split(" ").join("%20");
     setCurrentSearchTerm(searchWithSpace);
     setNewSearchTerm("");
   }
@@ -18,11 +16,6 @@ function ShowSearch({ shows, setCurrentSearchTerm }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      {/* <Input
-        shows={shows}
-        newSearchTerm={newSearchTerm}
-        handleChange={handleChange}
-      /> */}
       <input
         type="text"
         id="search-input"

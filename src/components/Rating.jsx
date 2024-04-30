@@ -1,9 +1,16 @@
+import { useState } from "react";
+
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 
-function RatingBasic({ rating }) {
+function RatingBasic({ rating, label }) {
+  const [isLabel, setIsLabel] = useState(false);
   const formatRating = rating / 2;
+
+  // if (label) {
+  //   setIsLabel(true);
+  // }
 
   return (
     <Box
@@ -12,7 +19,7 @@ function RatingBasic({ rating }) {
         "& .MuiRating-iconEmpty": { color: "#d7d7d7" },
       }}
     >
-      <Typography component="legend">Rating</Typography>
+      {isLabel ? <Typography component="legend">Rating</Typography> : null}
       <Rating
         name="read-only"
         value={formatRating}

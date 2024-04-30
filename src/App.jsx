@@ -5,6 +5,7 @@ import "./App.css";
 import Search from "./components/Search";
 import List from "./components/List";
 import Header from "./components/Header";
+import ShowPage from "./components/ShowPage";
 
 function App() {
   const [currentSearchTerm, setCurrentSearchTerm] = useState("Arrow");
@@ -20,7 +21,6 @@ function App() {
     fetch("https://api.tvmaze.com/shows")
       .then((res) => {
         if (!res.ok) {
-          console.log(res);
           return Promise.reject();
         }
         return res.json();
@@ -34,17 +34,16 @@ function App() {
   };
 
   return (
-      <>
+    <>
       <Header />
       <Search setCurrentSearchTerm={setCurrentSearchTerm} shows={shows} />
-    <Routes>
-      
-     
-      <Route path="/" element=       
-      {<List currentSearchTerm={currentSearchTerm} />}
-     />
-      
-    </Routes>
+      <Routes>
+        <Route
+          path="/"
+          element={<List currentSearchTerm={currentSearchTerm} />}
+        />
+        <Route path="/show/:show_id" element={<ShowPage />} />
+      </Routes>
     </>
   );
 }
